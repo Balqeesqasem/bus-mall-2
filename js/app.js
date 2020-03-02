@@ -9,7 +9,7 @@ var totalClicks = 0;
 var rightImageRandom;
 var centerImageRandom;
 var leftImageRandom;
-arrTest = [];
+var arrTest = [];
 var container = document.getElementById('results');
 var articleEl = document.createElement('article');
 container.appendChild(articleEl);
@@ -69,20 +69,17 @@ function pickRandom() {
   console.log('number of left views', leftImageRandom.views);
 
 }
-pickRandom();
 
+pickRandom();
 groupImageSection.addEventListener('click', clickTheImages);
 
-
 function clickTheImages(event) {
-
   if (event.target.id === 'right_img') {
     totalClicks++;
     rightImageRandom.votes = rightImageRandom.votes + 1;
     console.log('right votes', rightImageRandom.votes, rightImageRandom.name);
     pickRandom();
   }
-
   else if (event.target.id === 'center_img') {
     totalClicks++;
     centerImageRandom.votes = centerImageRandom.votes + 1;
@@ -96,7 +93,6 @@ function clickTheImages(event) {
     pickRandom();
   }
   else { alert('oooh no!'); }
-
   if (totalClicks === 25) {
     groupImageSection.removeEventListener('click', clickTheImages);
     rightImage.remove();
@@ -104,14 +100,10 @@ function clickTheImages(event) {
     leftImage.remove();
     //render();
     renderChartResults();
-
   }
 }
 
 function render() {
-  // var container = document.getElementById('results');
-  // var articleEl = document.createElement('article');
-  // container.appendChild(articleEl);
   var ulEl = document.createElement('ul');
   articleEl.appendChild(ulEl);
   for (var i = 0; i < arrayToPushInIt.length; i++) {
@@ -121,10 +113,6 @@ function render() {
   }
 }
 
-//helper functions
-function randomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 //MyFirstChart
 function renderChartResults(){
@@ -139,7 +127,6 @@ function renderChartResults(){
     var viewsImage = arrayToPushInIt[i].views;
     numViewsArray.push(viewsImage);
   }
-  console.log(imageVotes);
   var ctx = document.getElementById('myFirstChart').getContext('2d');
   // eslint-disable-next-line no-undef
   var myChart = new Chart(ctx, {
@@ -176,28 +163,7 @@ function renderChartResults(){
   });
 }
 
-//   var ctx = document.getElementById('myFirstChart').getContext('2d');
-//   // eslint-disable-next-line no-undef
-//   var myChart = new Chart(ctx, {
-//     type: 'bar',
-//     data: {
-//       labels: imagesNamesArr,
-//       datasets: [{
-//         label: '# of Views',
-//         data: numViewsArray,
-//         backgroundColor: 'rgba(255, 66, 155, 0.2)',
-//         borderColor: 'rgba(255, 66, 155, 1)',
-//         borderWidth: 1
-//       }]
-//     },
-//     options: {
-//       scales: {
-//         yAxes: [{
-//           ticks: {
-//             beginAtZero: true
-//           }
-//         }]
-//       }
-//     }
-//   });
-// }
+//helper functions
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
