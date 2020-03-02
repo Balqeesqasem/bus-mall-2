@@ -35,7 +35,7 @@ function pickRandom() {
 
 
 //to test if the same of the prevous round or not
-  while (arrTest.include(leftImageRandom) || arrTest.include(rightImageRandom) || arrTest.include(centerImageRandom)){
+  while (arrTest.includes(leftImageRandom) || arrTest.includes(rightImageRandom) || arrTest.includes(centerImageRandom)){
     rightImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
     centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
     leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
