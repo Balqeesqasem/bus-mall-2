@@ -43,7 +43,7 @@ function pickRandom() {
     centerImage.setAttribute('src', centerImageRandom.urlImage);
     centerImage.setAttribute('alt', centerImageRandom.name);
     centerImageRandom.views = centerImageRandom.views + 1;
-    console.log('number of center views',centerImageRandom);
+    console.log('number of center views',centerImageRandom.views);
     leftImage.setAttribute('src', leftImageRandom.urlImage);
     leftImage.setAttribute('alt', leftImageRandom.name);
     leftImageRandom.views = leftImageRandom.views + 1;
@@ -59,20 +59,20 @@ function clickTheImages(event) {
     if (event.target.id === 'right_img') {
         totalClicks++;
         rightImageRandom.votes = rightImageRandom.votes + 1;
-        console.log('right votes',rightImageRandom.votes);
+        console.log('right votes',rightImageRandom.votes,rightImageRandom.name);
         pickRandom();
     }
 
     else if (event.target.id === 'center_img') {
         totalClicks++;
         centerImageRandom.votes = centerImageRandom.votes + 1;
-        console.log('center votes',centerImageRandom.votes);
+        console.log('center votes',centerImageRandom.votes,centerImageRandom.name);
         pickRandom();
     }
     else if (event.target.id === 'left_img') {
         totalClicks++;
         leftImageRandom.votes = leftImageRandom.votes + 1;
-        console.log('left votes',leftImageRandom.votes);
+        console.log('left votes',leftImageRandom.votes,leftImageRandom.name);
         pickRandom();
     }
     else { alert('oooh no!'); }
@@ -81,7 +81,22 @@ function clickTheImages(event) {
         rightImage.remove();
         centerImage.remove();
         leftImage.remove();
+        render();
     }
+}
+
+
+function render() {
+    var container = document.getElementById('results');
+    var articleEl = document.createElement('article');
+    container.appendChild(articleEl);
+    var ulEl = document.createElement('ul');
+    articleEl.appendChild(ulEl);
+    for(var i = 0 ; i < arrayToPushInIt.length ; i++){
+      var liEl = document.createElement('li');
+      liEl.textContent = `${arrayToPushInIt[i].name} had ${arrayToPushInIt[i].votes} votes and was shown ${arrayToPushInIt[i].views} times`;
+      ulEl.appendChild(liEl);}
+
 }
 
 
