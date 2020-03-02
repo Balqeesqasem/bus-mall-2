@@ -10,11 +10,14 @@ var numClicksArray = [];
 var rightImageRandom;
 var centerImageRandom;
 var leftImageRandom;
+var container = document.getElementById('results');
+var articleEl = document.createElement('article');
+container.appendChild(articleEl);
 
 //the constructor function
 function BusMall(name) {
-    this.name = name;
-    this.urlImage = `images/${this.name}`;
+    this.name = name.split(".")[0];
+    this.urlImage = `images/${name}`;
     this.votes = 0;
     this.views = 0;
     arrayToPushInIt.push(this);//this refers to the object that i'm created
@@ -51,6 +54,7 @@ function pickRandom() {
 
 }
 pickRandom();
+
 groupImageSection.addEventListener('click', clickTheImages);
 
 
@@ -78,18 +82,18 @@ function clickTheImages(event) {
     else { alert('oooh no!'); }
 
     if (totalClicks === 25) {
-        rightImage.remove();
-        centerImage.remove();
-        leftImage.remove();
+        groupImageSection.removeEventListener('click',clickTheImages);
+        // rightImage.remove();
+        // centerImage.remove();
+        // leftImage.remove();
         render();
     }
 }
 
-
 function render() {
-    var container = document.getElementById('results');
-    var articleEl = document.createElement('article');
-    container.appendChild(articleEl);
+    // var container = document.getElementById('results');
+    // var articleEl = document.createElement('article');
+    // container.appendChild(articleEl);
     var ulEl = document.createElement('ul');
     articleEl.appendChild(ulEl);
     for(var i = 0 ; i < arrayToPushInIt.length ; i++){
