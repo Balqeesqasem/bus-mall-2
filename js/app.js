@@ -33,20 +33,18 @@ function pickRandom() {
   centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
   leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
 
-
+//to avoid same images 
+while (rightImageRandom.name === leftImageRandom.name || rightImageRandom.name === centerImageRandom.name || leftImageRandom.name === centerImageRandom.name) {
+  rightImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
+  centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
+  leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
+  //totalClicks++;
+}
 //to test if the same of the prevous round or not
   while (arrTest.includes(leftImageRandom) || arrTest.includes(rightImageRandom) || arrTest.includes(centerImageRandom)){
     rightImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
     centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
     leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
-  }
-
-  //to avoid same images 
-  while (rightImageRandom.name === leftImageRandom.name || rightImageRandom.name === centerImageRandom.name || leftImageRandom.name === centerImageRandom.name) {
-    rightImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
-    centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
-    leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
-    //totalClicks++;
   }
 
   arrTest = [];
@@ -58,15 +56,15 @@ function pickRandom() {
   rightImage.setAttribute('src', rightImageRandom.urlImage);
   rightImage.setAttribute('alt', rightImageRandom.name);
   rightImageRandom.views = rightImageRandom.views + 1;
-  console.log('number of right views', rightImageRandom.views);
+  console.log('number of right views', rightImageRandom.views,rightImageRandom.name);
   centerImage.setAttribute('src', centerImageRandom.urlImage);
   centerImage.setAttribute('alt', centerImageRandom.name);
   centerImageRandom.views = centerImageRandom.views + 1;
-  console.log('number of center views', centerImageRandom.views);
+  console.log('number of center views', centerImageRandom.views,centerImageRandom.name);
   leftImage.setAttribute('src', leftImageRandom.urlImage);
   leftImage.setAttribute('alt', leftImageRandom.name);
   leftImageRandom.views = leftImageRandom.views + 1;
-  console.log('number of left views', leftImageRandom.views);
+  console.log('number of left views', leftImageRandom.views,leftImageRandom.name);
 
 }
 
