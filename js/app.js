@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 var arrayOfImages = ['usb.gif', 'water-can.jpg', 'wine-glass.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'bag.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'unicorn.jpg', 'banana.jpg', 'tauntaun.jpg', 'boots.jpg', 'bathroom.jpg', 'chair.jpg', 'pen.jpg', 'dragon.jpg', 'dog-duck.jpg', 'cthulhu.jpg', 'sweep.png'];
 var arrayToPushInIt = [];//to store all objects
 var rightImage = document.querySelector('#right_img');
@@ -11,7 +11,7 @@ var centerImageRandom;
 var leftImageRandom;
 var arrTest = [];
 var container = document.getElementById('results');
-var articleEl = document.createElement('article');
+var articleEl = document.createElement("article");
 container.appendChild(articleEl);
 
 //the constructor function
@@ -21,7 +21,6 @@ function BusMall(name) {
   this.votes = 0;
   this.views = 0;
   arrayToPushInIt.push(this);//this refers to the object that i'm created
-
 }
 //new objects
 for (var i = 0; i < arrayOfImages.length; i++) {
@@ -33,13 +32,12 @@ function pickRandom() {
   centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
   leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
 
-//to avoid same images 
-while (rightImageRandom.name === leftImageRandom.name || rightImageRandom.name === centerImageRandom.name || leftImageRandom.name === centerImageRandom.name || arrTest.includes(leftImageRandom) || arrTest.includes(rightImageRandom) || arrTest.includes(centerImageRandom)) {
-  rightImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
-  centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
-  leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
-  //totalClicks++;
-}
+  while (rightImageRandom.name === leftImageRandom.name || rightImageRandom.name === centerImageRandom.name || leftImageRandom.name === centerImageRandom.name || arrTest.includes(leftImageRandom) || arrTest.includes(rightImageRandom) || arrTest.includes(centerImageRandom)) {
+    rightImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
+    centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
+    leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
+    //totalClicks++;
+  }
 
   arrTest = [];
   arrTest.push(rightImageRandom);
@@ -50,16 +48,15 @@ while (rightImageRandom.name === leftImageRandom.name || rightImageRandom.name =
   rightImage.setAttribute('src', rightImageRandom.urlImage);
   rightImage.setAttribute('alt', rightImageRandom.name);
   rightImageRandom.views = rightImageRandom.views + 1;
-  console.log('number of right views', rightImageRandom.views,rightImageRandom.name);
+  console.log('number of right views', rightImageRandom.views, rightImageRandom.name);
   centerImage.setAttribute('src', centerImageRandom.urlImage);
   centerImage.setAttribute('alt', centerImageRandom.name);
   centerImageRandom.views = centerImageRandom.views + 1;
-  console.log('number of center views', centerImageRandom.views,centerImageRandom.name);
+  console.log('number of center views', centerImageRandom.views, centerImageRandom.name);
   leftImage.setAttribute('src', leftImageRandom.urlImage);
   leftImage.setAttribute('alt', leftImageRandom.name);
   leftImageRandom.views = leftImageRandom.views + 1;
-  console.log('number of left views', leftImageRandom.views,leftImageRandom.name);
-
+  console.log('number of left views', leftImageRandom.views, leftImageRandom.name);
 }
 
 pickRandom();
@@ -69,30 +66,32 @@ function clickTheImages(event) {
   if (event.target.id === 'right_img') {
     totalClicks++;
     rightImageRandom.votes = rightImageRandom.votes + 1;
-    console.log('right votes', rightImageRandom.votes, rightImageRandom.name);
+    //console.log('right votes', rightImageRandom.votes, rightImageRandom.name);
     pickRandom();
   }
   else if (event.target.id === 'center_img') {
     totalClicks++;
     centerImageRandom.votes = centerImageRandom.votes + 1;
-    console.log('center votes', centerImageRandom.votes, centerImageRandom.name);
+    //console.log('center votes', centerImageRandom.votes, centerImageRandom.name);
     pickRandom();
   }
   else if (event.target.id === 'left_img') {
     totalClicks++;
     leftImageRandom.votes = leftImageRandom.votes + 1;
-    console.log('left votes', leftImageRandom.votes, leftImageRandom.name);
+    //console.log('left votes', leftImageRandom.votes, leftImageRandom.name);
     pickRandom();
   }
   else { alert('oooh no!'); }
+
+  setItem();
+
   if (totalClicks === 25) {
     groupImageSection.removeEventListener('click', clickTheImages);
     rightImage.remove();
     centerImage.remove();
     leftImage.remove();
-    //render();
-    renderChartResults();
   }
+
 }
 
 function render() {
@@ -105,13 +104,12 @@ function render() {
   }
 }
 
-
 //MyFirstChart
-function renderChartResults(){
+function renderChartResults() {
   var imagesNamesArr = [];
   var numClicksArray = [];
   var numViewsArray = [];
-  for(var i = 0 ; i < arrayToPushInIt.length ; i++){
+  for (var i = 0; i < arrayToPushInIt.length; i++) {
     var imageNames = arrayToPushInIt[i].name;
     imagesNamesArr.push(imageNames);
     var imageVotes = arrayToPushInIt[i].votes;
@@ -132,16 +130,16 @@ function renderChartResults(){
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1
       },
-        
-        {
-          label: '# of Views',
-          data: numViewsArray,
-          backgroundColor: 'rgba(255, 153, 51, 0.2)',
-          borderColor: 'rgba(255, 153, 51, 1)',
-          borderWidth: 1,
-          type:'bar',
-          labels: imagesNamesArr
-        }]
+
+      {
+        label: '# of Views',
+        data: numViewsArray,
+        backgroundColor: 'rgba(255, 153, 51, 0.2)',
+        borderColor: 'rgba(255, 153, 51, 1)',
+        borderWidth: 1,
+        type: 'bar',
+        labels: imagesNamesArr
+      }]
     },
     options: {
       scales: {
@@ -161,3 +159,18 @@ function randomNumber(min, max) {
 }
 
 
+//set
+function setItem() {
+  var resultOfSet = JSON.stringify(arrayToPushInIt);
+  localStorage.setItem('result of set', resultOfSet);
+}
+
+//get  
+function getItem() {
+  var resultOfGet = localStorage.getItem('result of set');
+  if(resultOfGet){
+  arrayToPushInIt = JSON.parse(resultOfGet);}
+  render();
+
+}
+getItem();
