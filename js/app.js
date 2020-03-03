@@ -90,6 +90,8 @@ function clickTheImages(event) {
     rightImage.remove();
     centerImage.remove();
     leftImage.remove();
+    render();
+
   }
 
 }
@@ -170,7 +172,7 @@ function getItem() {
   var resultOfGet = localStorage.getItem('result of set');
   if(resultOfGet){
   arrayToPushInIt = JSON.parse(resultOfGet);}
-  render();
+  // render();
 
 }
 getItem();
