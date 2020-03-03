@@ -34,18 +34,12 @@ function pickRandom() {
   leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
 
 //to avoid same images 
-while (rightImageRandom.name === leftImageRandom.name || rightImageRandom.name === centerImageRandom.name || leftImageRandom.name === centerImageRandom.name) {
+while (rightImageRandom.name === leftImageRandom.name || rightImageRandom.name === centerImageRandom.name || leftImageRandom.name === centerImageRandom.name || arrTest.includes(leftImageRandom) || arrTest.includes(rightImageRandom) || arrTest.includes(centerImageRandom)) {
   rightImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
   centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
   leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
   //totalClicks++;
 }
-//to test if the same of the prevous round or not
-  while (arrTest.includes(leftImageRandom) || arrTest.includes(rightImageRandom) || arrTest.includes(centerImageRandom)){
-    rightImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
-    centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
-    leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
-  }
 
   arrTest = [];
   arrTest.push(rightImageRandom);
