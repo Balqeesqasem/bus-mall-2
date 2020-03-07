@@ -1,4 +1,5 @@
 'use strict';
+//Global variables
 var arrayOfImages = ['usb.gif', 'water-can.jpg', 'wine-glass.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'bag.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'unicorn.jpg', 'banana.jpg', 'tauntaun.jpg', 'boots.jpg', 'bathroom.jpg', 'chair.jpg', 'pen.jpg', 'dragon.jpg', 'dog-duck.jpg', 'cthulhu.jpg', 'sweep.png'];
 var arrayToPushInIt = [];//to store all objects
 var rightImage = document.querySelector('#right_img');
@@ -14,7 +15,7 @@ var container = document.getElementById('results');
 var articleEl = document.createElement("article");
 container.appendChild(articleEl);
 
-//the constructor function
+//The constructor function
 function BusMall(name) {
   this.name = name.split(".")[0];
   this.urlImage = `images/${name}`;
@@ -22,24 +23,24 @@ function BusMall(name) {
   this.views = 0;
   arrayToPushInIt.push(this);//this refers to the object that i'm created
 }
-//new objects
+//New objects
 for (var i = 0; i < arrayOfImages.length; i++) {
   new BusMall(arrayOfImages[i]);
 }
-//to pick the random images
+//To pick the random images
 function pickRandom() {
   rightImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
   centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
   leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
 
+  //To ensure that the three images in the same round different and don't repeat it on the next round
   while (rightImageRandom.name === leftImageRandom.name || rightImageRandom.name === centerImageRandom.name || leftImageRandom.name === centerImageRandom.name || arrTest.includes(leftImageRandom) || arrTest.includes(rightImageRandom) || arrTest.includes(centerImageRandom)) {
     rightImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
     centerImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
     leftImageRandom = arrayToPushInIt[randomNumber(0, arrayToPushInIt.length - 1)];
-    //totalClicks++;
   }
 
-  arrTest = [];
+  arrTest = [];//clear the array
   arrTest.push(rightImageRandom);
   arrTest.push(centerImageRandom);
   arrTest.push(leftImageRandom);
@@ -84,18 +85,17 @@ function clickTheImages(event) {
   else { alert('oooh no!'); }
 
   setItem();
-
+//If the rounds completed
   if (totalClicks === 25) {
     groupImageSection.removeEventListener('click', clickTheImages);
     rightImage.remove();
     centerImage.remove();
     leftImage.remove();
     render();
-
   }
 
 }
-
+//render function
 function render() {
   var ulEl = document.createElement('ul');
   articleEl.appendChild(ulEl);
